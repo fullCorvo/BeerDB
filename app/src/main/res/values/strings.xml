@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">BeerDB</string>
+    <string name="search_hint_text">Search for a beer…</string>
+</resources>
