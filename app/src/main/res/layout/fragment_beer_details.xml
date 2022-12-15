@@ -5,7 +5,8 @@
     android:id="@+id/frameLayoutBeerFragment"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".views.BeerDetailsFragment" >
+    tools:context=".views.BeerDetailsFragment"
+    android:background="@drawable/gradient">
 
     <ImageView
         android:id="@+id/beerImageBeerFragment"

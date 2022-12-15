@@ -5,7 +5,28 @@
     android:id="@+id/frameLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".views.HomeFragment" >
+    tools:context=".views.HomeFragment"
+    android:background="@drawable/gradient">
+
+    <TextView
+        android:id="@+id/beerDBTextView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="10dp"
+        android:shadowColor="@color/grey"
+        android:shadowDx="10"
+        android:shadowDy="10"
+        android:shadowRadius="10"
+        android:text="@string/app_name"
+        android:textAlignment="center"
+        android:textColor="@color/dark_yellow"
+        android:textSize="34sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <android.widget.SearchView
         android:id="@+id/searchViewHomeFragment"
@@ -14,12 +35,16 @@
         android:layout_marginStart="10dp"
         android:layout_marginTop="10dp"
         android:layout_marginEnd="10dp"
+        android:background="@drawable/search_view_style"
+        android:clickable="true"
+        android:elevation="25dp"
+        android:focusable="true"
+        android:iconifiedByDefault="false"
+        android:queryHint="@string/search_hint_text"
+        app:iconifiedByDefault="false"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:background="@android:drawable/dialog_holo_light_frame"
-        android:queryBackground="@android:color/transparent"
-        android:queryHint="@string/search_hint_text"/>
+        app:layout_constraintTop_toBottomOf="@+id/beerDBTextView" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerViewHomeFragment"
