@@ -10,6 +10,7 @@ import android.view.inputmethod.InputMethodManager
 import android.widget.SearchView
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.beerdb.adapters.BeerItemAdapter
@@ -18,7 +19,7 @@ import com.example.beerdb.models.BeerModel
 import com.example.beerdb.viewmodels.BeerListViewModel
 import com.example.beerdb.R
 
-class HomeFragment : Fragment(R.layout.fragment_home) {
+class HomeFragment : Fragment(R.layout.fragment_home), BeerDetailsNavigationListener{
 
     // Initialize ViewBinding
     private lateinit var binding : FragmentHomeBinding
@@ -81,7 +82,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
     //Initializing recyclerView and adding data to it
     private fun populateView(beerList: List<BeerModel>) {
 
-        val beerItemAdapter = BeerItemAdapter()
+        val beerItemAdapter = BeerItemAdapter(this)
         beerItemAdapter.setBeerList(beerList)
 
         recyclerView.adapter = beerItemAdapter
@@ -94,4 +95,19 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         val imm = context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
         imm.hideSoftInputFromWindow(windowToken, 0)
     }
+
+    override fun navigateToBeerDetails(beer: BeerModel) {
+        val beerName = beer.name
+        val beerDescription = beer.description
+        val beerImage = beer.image_url
+
+        val action = HomeFragmentDirections.actionHomeFragmentToBeerDetailsFragment(
+            beerName,
+            beerDescription,
+            beerImage)
+
+        findNavController().navigate(action)
+    }
+
+
 }

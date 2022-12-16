@@ -10,16 +10,17 @@ import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.example.beerdb.R
 import com.example.beerdb.models.BeerModel
+import com.example.beerdb.views.BeerDetailsNavigationListener
 import com.example.beerdb.views.HomeFragmentDirections
 import com.squareup.picasso.Picasso
 
-class BeerItemAdapter  : RecyclerView.Adapter<BeerItemAdapter.ViewHolder>() {
+class BeerItemAdapter(private val beerDetailsNavigationListener: BeerDetailsNavigationListener)  : RecyclerView.Adapter<BeerItemAdapter.ViewHolder>() {
 
     private var beersList : List<BeerModel> = listOf()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.beer_item, parent, false)
-        return ViewHolder(view)
+        return ViewHolder(view, beerDetailsNavigationListener)
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
@@ -37,7 +38,7 @@ class BeerItemAdapter  : RecyclerView.Adapter<BeerItemAdapter.ViewHolder>() {
         notifyDataSetChanged()
     }
 
-    inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    class ViewHolder(itemView: View, private val beerDetailsNavigationListener: BeerDetailsNavigationListener) : RecyclerView.ViewHolder(itemView) {
 
         var imageView: ImageView = itemView.findViewById(R.id.beerImageBeerItem)
         var beerName: TextView = itemView.findViewById(R.id.beerNameBeerItem)
@@ -45,14 +46,18 @@ class BeerItemAdapter  : RecyclerView.Adapter<BeerItemAdapter.ViewHolder>() {
         var abvValue: TextView = itemView.findViewById(R.id.abvValueTextViewBeerItem)
         // var starImage: ImageView = itemView.findViewById(R.id.starIconImageViewCardView)
 
-
         fun bind(beer: BeerModel) {
             Picasso.get().load(beer.image_url).into(imageView)
             beerName.text = beer.name
             tagline.text = beer.tagline
             abvValue.text = beer.abv.toString()
 
-            /*
+            itemView.setOnClickListener {
+
+                beerDetailsNavigationListener.navigateToBeerDetails(beer)
+            }
+
+        /*
             //check if beer is in favourites list to show/hide star symbol
             val sharedPreferences = context.getSharedPreferences("myPreferences",
                 Context.MODE_PRIVATE
@@ -65,27 +70,6 @@ class BeerItemAdapter  : RecyclerView.Adapter<BeerItemAdapter.ViewHolder>() {
             else starImage.visibility = View.INVISIBLE
 
          */
-        }
-
-        //we want the CardView to be clickable and to redirect to BeerFragment on Click
-        //passing all the beer info through intent
-
-        init {
-            itemView.setOnClickListener {
-
-                val position: Int = adapterPosition
-                val beerName = beersList[position].name
-                val beerDescription = beersList[position].description
-                val beerImage = beersList[position].image_url
-
-                val action = HomeFragmentDirections.actionHomeFragmentToBeerDetailsFragment(
-                    beerName,
-                    beerDescription,
-                    beerImage)
-
-                itemView.findNavController().navigate(action)
-
-            }
         }
     }
 }
