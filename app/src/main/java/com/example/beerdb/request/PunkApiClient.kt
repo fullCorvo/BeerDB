@@ -6,8 +6,11 @@ import com.example.beerdb.models.BeerModel
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import javax.inject.Inject
+import javax.inject.Singleton
 
-class PunkApiClient {
+@Singleton
+class PunkApiClient @Inject constructor(private val punkApi: PunkApi) {
 
     // LiveData
     private var beerList : MutableLiveData<List<BeerModel>?> = MutableLiveData()
@@ -18,15 +21,18 @@ class PunkApiClient {
 
     fun searchBeers(query: String) {
 
+        Log.d("PunkApi Client", "Inside searchBeers")
+
         //initiate the service
-        val destinationService = ServiceBuilder.buildService(PunkApi::class.java)
-        val requestCall = destinationService.searchBeer(query)
+        val requestCall = punkApi.searchBeer(query)
 
         //make network call asynchronously
         requestCall.enqueue(object : Callback<List<BeerModel>> {
             override fun onResponse(call: Call<List<BeerModel>>, response: Response<List<BeerModel>>) {
 
                 if (response.isSuccessful){
+
+                    Log.d("PunkApi Client", "response size is: ${response.body()?.size}")
 
                     val list = response.body()
 

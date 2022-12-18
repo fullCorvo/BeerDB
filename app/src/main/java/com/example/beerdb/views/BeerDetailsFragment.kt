@@ -10,7 +10,9 @@ import androidx.navigation.fragment.navArgs
 import com.example.beerdb.databinding.ActivityMainBinding.inflate
 import com.example.beerdb.databinding.FragmentBeerDetailsBinding
 import com.squareup.picasso.Picasso
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class BeerDetailsFragment : Fragment() {
 
     private val args: BeerDetailsFragmentArgs by navArgs()

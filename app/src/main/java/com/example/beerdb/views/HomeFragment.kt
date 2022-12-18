@@ -2,6 +2,7 @@ package com.example.beerdb.views
 
 import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import androidx.fragment.app.Fragment
 import android.view.View
@@ -18,14 +19,16 @@ import com.example.beerdb.databinding.FragmentHomeBinding
 import com.example.beerdb.models.BeerModel
 import com.example.beerdb.viewmodels.BeerListViewModel
 import com.example.beerdb.R
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class HomeFragment : Fragment(R.layout.fragment_home), BeerDetailsNavigationListener{
 
     // Initialize ViewBinding
     private lateinit var binding : FragmentHomeBinding
 
     // Instantiate ViewModel
-    private val viewModel: BeerListViewModel by viewModels()
+    private val viewModel by viewModels<BeerListViewModel>()
 
     // Initialize recyclerView
     private lateinit var recyclerView: RecyclerView
@@ -75,6 +78,7 @@ class HomeFragment : Fragment(R.layout.fragment_home), BeerDetailsNavigationList
     }
 
     private fun searchBeers(query: String) {
+        Log.d("Home Fragment", "inside searchBeers")
         viewModel.searchBeers(query)
     }
 

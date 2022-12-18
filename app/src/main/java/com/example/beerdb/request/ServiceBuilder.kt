@@ -6,7 +6,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 object ServiceBuilder {
 
-    private const val baseUrl = "https://api.punkapi.com/v2/"
+    const val baseUrl = "https://api.punkapi.com/v2/"
 
     //CREATE HTTP CLIENT
     private val okHttp = OkHttpClient.Builder()
