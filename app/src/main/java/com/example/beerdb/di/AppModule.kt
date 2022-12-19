@@ -2,7 +2,6 @@ package com.example.beerdb.di
 
 import com.example.beerdb.request.PunkApi
 import com.example.beerdb.request.PunkApiClient
-import com.example.beerdb.request.ServiceBuilder
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
