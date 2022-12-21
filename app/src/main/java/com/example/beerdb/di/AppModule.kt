@@ -1,7 +1,6 @@
 package com.example.beerdb.di
 
 import com.example.beerdb.request.PunkApi
-import com.example.beerdb.request.PunkApiClient
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -14,7 +13,7 @@ import javax.inject.Singleton
 @InstallIn(SingletonComponent::class)
 object AppModule {
 
-    //Instructions for dagger
+    //Instructions for dagger hilt
 
     @Provides
     @Singleton

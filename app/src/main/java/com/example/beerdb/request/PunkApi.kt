@@ -11,7 +11,6 @@ interface PunkApi {
         const val BASE_URL = "https://api.punkapi.com/v2/"
     }
 
-
     //Queries to communicate with the Rest Api PUNK API
 
     @GET("beers")
